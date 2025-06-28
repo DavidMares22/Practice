@@ -6,8 +6,21 @@ using System.Threading.Tasks;
 
 namespace Practice
 {
-    public class LongestEvenWord
+    public static class LongestEvenWord
     {
+        // Helper method to remove punctuation from a word
+        // StringBuilder is used for efficient string concatenation when iterating over each character,
+        // as it avoids creating multiple intermediate string instances that would occur with string concatenation in a loop.
+        private static string RemovePunctuation(string word)
+        {
+            var sb = new StringBuilder();
+            foreach (var c in word)
+            {
+                if (char.IsLetterOrDigit(c))
+                    sb.Append(c);
+            }
+            return sb.ToString();
+        }
 
         public static string FindLongestEvenWord(string input)
         {
@@ -16,26 +29,27 @@ namespace Practice
 
             foreach (var word in wordArr)
             {
-                if(word.Length > longestSoFar.Length && word.Length % 2 == 0)
+                var cleanWord = RemovePunctuation(word);
+                if (cleanWord.Length > longestSoFar.Length && cleanWord.Length % 2 == 0)
                 {
-
-                longestSoFar = word;
+                    longestSoFar = cleanWord;
                 }
             }
 
-            return string.IsNullOrEmpty(longestSoFar)? "00" : longestSoFar;
+            return string.IsNullOrEmpty(longestSoFar) ? "00" : longestSoFar;
         }
 
         public static string FindLongestEvenWord2(string input)
         {
             var longestEvenWord = input
                 .Split(' ')
-                .Where(word => word.Length % 2 == 0)
+                //If your input is "David. likes apples!", after splitting and applying .Select(RemovePunctuation), you get: ["David", "likes", "apples"].
+                .Select(RemovePunctuation)
+                .Where(word => word.Length % 2 == 0 && word.Length > 0)
                 .OrderByDescending(word => word.Length)
                 .FirstOrDefault();
 
             return string.IsNullOrEmpty(longestEvenWord) ? "00" : longestEvenWord;
         }
-
     }
 }
