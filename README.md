@@ -32,7 +32,17 @@ Contains methods to find the longest word with an even number of characters in a
 
 ---
 
-### 4. `Program`
+### 4. `BinaryString`
+Provides methods to check if a string contains only binary digits ('0' and '1').
+
+- **Methods:**
+  - `CheckIfStringIsBinary(string input)`: Checks using a foreach loop.
+  - `CheckIfStringIsBinary2(string input)`: Checks using LINQ's `All` method.
+  - `CheckIfStringIsBinary3(string input)`: Checks using LINQ's `Any` method.
+
+---
+
+### 5. `Program`
 Entry point of the application. Demonstrates usage of utility classes and methods.
 
 - **Methods:**
@@ -44,4 +54,3 @@ Entry point of the application. Demonstrates usage of utility classes and method
 
 - All classes are in the `Practice` namespace.
 - The project uses C# 12.0 features and is compatible with .NET 8.
-
